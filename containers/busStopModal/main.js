@@ -24,14 +24,12 @@ class Main extends Component {
             isMounted: true
         })
         await Font.loadAsync({
-            'Pacifico': require('../../assets/fonts/Pacifico-Regular.ttf')
-        })
-        if (this.state.isMounted) {
-            this.setState({
-                fontLoaded: true
-            })
+            'Pacifico': require('../../assets/fonts/Pacifico-Regular.ttf'),
+            'Lato': require('../../assets/fonts/Lato-Light.ttf'),
+            'Ubuntu':require('../../assets/fonts/Ubuntu-Regular.ttf')
+        });
+        this.setState({fontsLoaded:true})
 
-        }
 
     }
     componentWillUnmount() {

@@ -53,17 +53,53 @@ var styles = React.StyleSheet.create({
         fontSize:25,
         fontFamily:'Pacifico'
       },
-      modalContainer:{
-        height: "60%", 
-        width: '85%', 
-        borderTopColor: 'rgba(226, 226, 226, 0.5)',
-        justifyContent: "space-between", 
+  
+      modalContainer: {
+        height: "85%",
+        display:'flex',
+        width: '90%',
+        justifyContent: "center",
+        alignItems: 'center',
+
+    },
+    backgroundImage:{
+      overflow:'hidden',
+      borderStyle: 'solid',
+      borderWidth: 1,
+      borderColor:'black',
+      borderRadius: 20,
+     
+     
+
+    },
+      modalWrap:{
+       
+        flexDirection: 'row', 
+        justifyContent: 'center',
         alignItems: 'center', 
-        borderWidth:1,
-        borderColor:'black',
-        borderStyle:'solid',
-        borderRadius:20,
-        backgroundColor:'rgba(226, 226, 226, 0.85)'
+      
+      },
+      column: {
+        display: 'flex',
+        flexDirection: 'column',
+        flexBasis: '100%',
+        flex: 1
+        
+      },
+      row :{
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        width: '100%',
+      },
+      blueColumn :{
+        backgroundColor: 'blue',
+        height: '50%',
+      },
+      
+      greenColumn:{
+        backgroundColor: 'green',
+        height: '50%'
       }
   
 });

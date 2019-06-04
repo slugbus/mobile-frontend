@@ -19,7 +19,7 @@ var view = function () {
         <Image alt="bus++" source={require('../../assets/mapIcons/Logo_2.png')} style={{ width: 135, height: 33.75 }} ></Image>
 
       </View>
-      <View style={{ width: width, height: height }}>
+      <View style={{ width: width, height: height, }}>
         <MapView
 
           style={{ flex: 1, alignSelf: 'stretch' }}
