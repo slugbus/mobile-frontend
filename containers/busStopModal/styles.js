@@ -55,9 +55,9 @@ var styles = React.StyleSheet.create({
       },
   
       modalContainer: {
-        height: "85%",
+        height: "77%",
         display:'flex',
-        width: '90%',
+        width: '100%',
         justifyContent: "center",
         alignItems: 'center',
 

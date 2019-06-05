@@ -3,9 +3,10 @@ import ComponentView from './view';
 import allStops from '../../busData/allStops'
 import Axios from 'axios';
 const Slug_Bus_90 = require('../../assets/mapIcons/Slug_Bus_90.png')
-import {Image} from 'react-native'
+import { Image } from 'react-native'
+import { Constants, MapView, Location, Permissions } from 'expo';
 
-var num =0
+var num = 0
 
 class Main extends Component {
 
@@ -22,27 +23,56 @@ class Main extends Component {
             busArray: [],
             responseSize: 0,
             initBusMarkers: false,
-            tracksViewChanges:true,        
+            tracksViewChanges: true,
             busStopVisible: false,
             busInfoVisible: false,
-            clickedMarker: {}
+            clickedMarker: {},
+            locationResult: null,
+            userLocation: []
 
         }
     }
 
     async componentDidMount() {
 
-        
-            this.addMarker()
-            this.intervalId = setInterval(this.addMarker.bind(this), 1000)
-        
-
-       
-       
+        this.getLocationAsync();
+        this.addMarker()
+        this.intervalId = setInterval(this.addMarker.bind(this), 1000)
 
     }
 
+    getLocationAsync = async () => {
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        console.log("STATUS", status)
+        if (status !== 'granted') {
+            this.setState({
+                locationResult: 'Permission to access location was denied',
+            });
+        } else {
 
+            this.setState({ hasLocationPermissions: true });
+        }
+        let location = await Location.getCurrentPositionAsync({});
+        let locationObj = JSON.stringify(location)
+        userLocArray = []
+
+        userLocArray.push({
+            key:1,
+            latlng: {
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude
+            }
+
+        })
+        this.setState({
+            locationResult: JSON.stringify(location),
+            userLocation: [...userLocArray]
+
+        });
+        console.log('userLOc', this.state.userLocation)
+
+
+    };
 
     onRegionChange = (region) => {
         console.log('onRegionChange', region);
@@ -56,7 +86,7 @@ class Main extends Component {
         let busArray = []
 
 
-        Axios.get('http://169.233.170.156:8080/location/get')
+        Axios.get('http://169.233.250.40:8080/location/get')
             .then(
                 (response) => {
                     this.setState({
@@ -70,7 +100,8 @@ class Main extends Component {
             });
 
         await this.state.busArray.map(bus => {
-            if (bus.type !== 'Loop Out Of Service At Barn Theater Bus') {
+            console.log(bus.type)
+            if (bus.type !== 'LOOP OUT OF SERVICE AT BARN THEATER') {
                 return busArray.push(
                     { ...bus, angle: Math.floor(Math.random() * 360) + 1 }
                 )
@@ -158,7 +189,7 @@ class Main extends Component {
 
     }
 
-    onMarkersLoad=() =>{
+    onMarkersLoad = () => {
         console.log(num)
         num++
         this.setState({
@@ -171,32 +202,11 @@ class Main extends Component {
     changeBusMarker(angle) {
 
         return (
-            <Image onLoad={()=>this.onMarkersLoad()} source={Slug_Bus_90}  style={{ transform: [{ rotate: angle + 'deg' }],width:75,height:75 }} />
+            <Image onLoad={() => this.onMarkersLoad()} source={Slug_Bus_90} style={{ transform: [{ rotate: angle + 'deg' }], width: 75, height: 75 }} />
 
         )
     }
 
-    async getLocation() {
-        //let { status } = await Permissions.askAsync(Permissions.LOCATION);
-        if (!status !== 'granted') {
-            this.setState({
-                locationResult: 'Location not permitted'
-            });
-        } else {
-            this.setState({
-                hasLocationPermissions: true
-            })
-
-        }
-
-        this.setState({
-            mapRegion: {
-                latitude: 36.9906317,
-                longitude: -122.0615714,
-
-            }
-        })
-    }
     /**
      * Render Method
      * @returns {*}

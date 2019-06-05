@@ -54,16 +54,16 @@ var styles = React.StyleSheet.create({
         fontFamily: 'Pacifico'
     },
     modalContainer: {
-        height: "20%",
-        width: '40%',
-        backgroundColor:'rgba(226, 226, 226, 0.85)',
-        borderTopColor: 'rgba(226, 226, 226, 0.5)',
-        justifyContent: "space-between",
+        height: "40%",
+        width: '65%',
+        display:'flex',
+        overflow:'hidden',
+        justifyContent: "center",
         alignItems: 'center',
-        borderWidth: 1,
-        borderColor: 'black',
-        borderStyle: 'solid',
-        borderRadius: 20
+        borderStyle:'solid',
+        borderWidth:1,
+        borderColor:'black',
+        borderRadius:20
     }
 
 });

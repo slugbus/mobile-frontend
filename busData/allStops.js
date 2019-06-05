@@ -242,7 +242,7 @@ export default allStops = [
     {
         direction: "Outer",
         icon: RedIcon,
-        "name": "Hagar & Bookstore-Stevenson College",
+        "name": "Hagar & Bookstore",
         latlng:{
             latitude:  36.9974822998047,
             longitude:-122.055030822754,
